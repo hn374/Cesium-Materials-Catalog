@@ -23,11 +23,55 @@ import {LitElement, html, css} from 'lit-element';
 export class MaterialsCatalog extends LitElement {
   static get styles() {
     return css`
-      :host {
+      /* :host {
         display: block;
         border: solid 1px gray;
         padding: 16px;
-        max-width: 800px;
+        max-width: 1000px;
+      } */
+
+      .container {
+        border: solid 1px gray;
+        padding: 16px;
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #24242B;
+      }
+
+      .materialsHeader {
+        color: #E0E0E1;
+        font-size: 48px;
+      }
+
+      .buttonsContainer {
+        display: flex;
+      }
+
+      .addButton {
+        background-color: #2E76DB;
+        border-radius: 25px;
+        padding: 5px 20px;
+        font-size: 24px;
+        color: white;
+        margin-right: 12px;
+      }
+
+      .addButton:hover {
+        background-color: #ABD7FB;
+      }
+
+      .deleteButton {
+        background-color: #FA414B;
+        border-radius: 25px;
+        padding: 5px 20px;
+        font-size: 24px;
+        color: white;
+      }
+
+      .deleteButton:hover {
+        background-color: #FB7570;
       }
     `;
   }
@@ -54,11 +98,17 @@ export class MaterialsCatalog extends LitElement {
 
   render() {
     return html`
-      <h1>Hello, ${this.name}!</h1>
-      <button @click=${this._onClick} part="button">
-        Click Count: ${this.count}
-      </button>
-      <slot></slot>
+      <div class="container">
+        <h1 class="materialsHeader">Materials</h1>
+        <div class="buttonsContainer">
+          <button class="addButton">Add</button>
+          <button class="deleteButton">Delete</button>
+        </div>
+        <div class="mainContainer">
+          <div class="listContainer"></div>
+          <div class="valueContainer"></div>
+        </div>
+      </div>
     `;
   }
 

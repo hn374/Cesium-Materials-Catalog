@@ -1,16 +1,16 @@
-import {MyElement} from '../materialsCatalog.js';
+import {MaterialsCatalog} from '../materials-catalog.js';
 import {fixture, html} from '@open-wc/testing';
 
 const assert = chai.assert;
 
-suite('my-element', () => {
+suite('materials-catalog', () => {
   test('is defined', () => {
-    const el = document.createElement('my-element');
-    assert.instanceOf(el, MyElement);
+    const el = document.createElement('materials-catalog');
+    assert.instanceOf(el, MaterialsCatalog);
   });
 
   test('renders with default values', async () => {
-    const el = await fixture(html`<my-element></my-element>`);
+    const el = await fixture(html`<materials-catalog></materials-catalog>`);
     assert.shadowDom.equal(
       el,
       `
@@ -22,7 +22,7 @@ suite('my-element', () => {
   });
 
   test('renders with a set name', async () => {
-    const el = await fixture(html`<my-element name="Test"></my-element>`);
+    const el = await fixture(html`<materials-catalog name="Test"></materials-catalog>`);
     assert.shadowDom.equal(
       el,
       `
@@ -34,7 +34,7 @@ suite('my-element', () => {
   });
 
   test('handles a click', async () => {
-    const el = await fixture(html`<my-element></my-element>`);
+    const el = await fixture(html`<materials-catalog></materials-catalog>`);
     const button = el.shadowRoot.querySelector('button');
     button.click();
     await el.updateComplete;

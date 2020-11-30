@@ -1,20 +1,20 @@
 ---
 layout: example.11ty.cjs
-title: <my-element> ⌲ Examples ⌲ Basic
+title: <materials-catalog> ⌲ Examples ⌲ Basic
 tags: example
 name: Basic
 description: A basic example
 ---
 
 <style>
-  my-element p {
+  materials-catalog p {
     border: solid 1px blue;
     padding: 8px;
   }
 </style>
-<my-element>
+<materials-catalog>
   <p>This is child content</p>
-</my-element>
+</materials-catalog>
 
 <h3>CSS</h3>
 
@@ -28,7 +28,7 @@ description: A basic example
 <h3>HTML</h3>
 
 ```html
-<my-element>
+<materials-catalog>
   <p>This is child content</p>
-</my-element>
+</materials-catalog>
 ```
