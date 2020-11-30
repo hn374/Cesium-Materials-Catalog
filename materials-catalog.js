@@ -137,31 +137,25 @@ export class MaterialsCatalog extends LitElement {
       .totalCost {
         margin-top: 32px;
         color: #E0E0E1;
+        margin-left: 164px;
+        align-self: flex-start;
       }
     `;
   }
 
   static get properties() {
     return {
-      /**
-       * The name to say "Hello" to.
-       */
-      name: {type: String},
-
-      /**
-       * The number of times the button has been clicked.
-       */
-      count: {type: Number},
-      volume: {type: Number},
-      cost: {type: Number},
-      deliveryDate: {type: Number},
+      totalCost: {type: Number},
       listOfMaterials: {type: Array},
+      currentlySelectedMaterial: {type: Object},
     };
   }
 
   constructor() {
     super();
+    this.totalCost = this.calculateTotalCost();
     this.listOfMaterials = [];
+    this.currentlySelectedMaterial = this.listOfMaterials[0];
   }
 
   render() {
@@ -177,7 +171,7 @@ export class MaterialsCatalog extends LitElement {
             ${(this.listOfMaterials.length != 0) ? this.listOfMaterials.map(item => html`
             <li class="listItem">
               <p class="listLabels">${item.name}</p>
-              <p class="listLabels">${item.volume}</p>
+              <p class="listLabels">${item.volume} m&sup3;</p>
             </li>
             `) 
             : html`<p class="noMaterialsLabel">No Materials</p>`}
@@ -186,7 +180,7 @@ export class MaterialsCatalog extends LitElement {
             <div class="valueContainerRowOne">
               <div class="nameContainer">
                 <p>Name</p>
-                <input type="text">
+                <input value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.name : ""} type="text" @change=${e => this._handleChange(e, "name", this.currentlySelectedMaterial.id)}>
               </div>
               <div>
                 <p>Color</p>
@@ -195,45 +189,75 @@ export class MaterialsCatalog extends LitElement {
             <div class="valueContainerRowTwo">
               <div class="volumeContainer">
                 <p>Volume (m&sup3;)</p>
-                <input type="text">
+                <input value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.volume : 0} type="text" @change=${e => this._handleChange(e, "volume")}>
               </div>
               <div>
                 <p>Cost (USD per m&sup3;)</p>
-                <input type="text">
+                <input value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.cost : 0} type="text" @change=${e => this._handleChange(e, "cost")}>
               </div>
             </div>
             <div class="valueContainerRowThree">
               <div class="deliveryDate">
                 <p>Delivery Date</p>
-                <input type="text">
+                <input value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.deliveryDate : "1/1/2020 "} type="text" @change=${e => this._handleChange(e, "deliveryDate")}>
               </div>
             </div>
           </div>
         </div>
-        <div class="totalCost">Total Cost: </div>
+        <div class="totalCost">Total Cost: $${this.totalCost}</div>
       </div>
     `;
   }
 
   _handleAddClick() {
     let materialsObject = {
-      name: "Hello",
+      id: this.listOfMaterials.length,
+      name: "Insert Name",
       color: "",
       volume: 0,
       cost: 0,
-      deliveryDate: 0,
+      deliveryDate: "1/1/2020",
     }
 
     this.listOfMaterials.push(materialsObject);
+    this.currentlySelectedMaterial = materialsObject;
     this.requestUpdate();
-
-    console.log(materialsObject);
-    console.log(this.listOfMaterials);
   }
 
   _handleDeleteClick() {
-    // Add code here later
-    console.log("DELETE CLICK");
+    delete this.listOfMaterials[this.currentlySelectedMaterial.id]
+    this.currentlySelectedMaterial = this.listOfMaterials[0];
+    this.requestUpdate();
+  }
+
+  _handleChange(e, inputField, id) {
+    if (inputField == "name") {
+      this.currentlySelectedMaterial.name = e.target.value;
+    } else if (inputField == "volume") {
+      this.currentlySelectedMaterial.volume = e.target.value;
+    } else if (inputField == "cost") {
+      this.currentlySelectedMaterial.cost = e.target.value;
+    } else if (inputField == "deliveryDate") {
+      this.currentlySelectedMaterial.deliveryDate = e.target.value;
+    }
+
+    this.listOfMaterials[id] = this.currentlySelectedMaterial;
+    this.requestUpdate();
+  }
+
+  calculateTotalCost() {
+    if (this.listOfMaterials?.length > 0) {
+      var sum = 0;
+
+      this.listOfMaterials.forEach(item => {
+        var itemTotal = item.volume * item.cost;
+        sum += itemTotal;
+      });
+
+      return sum;
+    } else {
+      return 0;
+    }
   }
 }
 
