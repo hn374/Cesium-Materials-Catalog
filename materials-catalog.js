@@ -23,13 +23,6 @@ import {LitElement, html, css} from 'lit-element';
 export class MaterialsCatalog extends LitElement {
   static get styles() {
     return css`
-      /* :host {
-        display: block;
-        border: solid 1px gray;
-        padding: 16px;
-        max-width: 1000px;
-      } */
-
       .container {
         border: solid 1px gray;
         padding: 64px 20px;
@@ -88,6 +81,27 @@ export class MaterialsCatalog extends LitElement {
         margin-right: 32px;
         border: 1px solid #E0E0E1;
         width: 250px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        overflow: auto;
+        height: 264px;
+      }
+
+      .noMaterialsLabel {
+        font-style: italic;
+      }
+
+      .listItem {
+        border: 1px solid #E0E0E1;
+        list-style-type: none;
+        width: 99%;
+        padding: 4px 0px;
+      }
+
+      .listLabels {
+        margin: 0px;
+        margin-left: 4px;
       }
 
       .valueContainer {
@@ -147,11 +161,6 @@ export class MaterialsCatalog extends LitElement {
 
   constructor() {
     super();
-    this.name = 'World';
-    this.count = 0;
-    this.volume = 0;
-    this.cost = 0;
-    this.deliveryDate = 0;
     this.listOfMaterials = [];
   }
 
@@ -160,12 +169,18 @@ export class MaterialsCatalog extends LitElement {
       <div class="container">
         <h1 class="materialsHeader">Materials</h1>
         <div class="buttonsContainer">
-          <button class="addButton">Add</button>
-          <button class="deleteButton">Delete</button>
+          <button class="addButton" @click="${this._handleAddClick}">Add</button>
+          <button class="deleteButton" @click="${this._handleDeleteClick}">Delete</button>
         </div>
         <div class="mainContainer">
           <div class="listContainer">
-            Hello World
+            ${(this.listOfMaterials.length != 0) ? this.listOfMaterials.map(item => html`
+            <li class="listItem">
+              <p class="listLabels">${item.name}</p>
+              <p class="listLabels">${item.volume}</p>
+            </li>
+            `) 
+            : html`<p class="noMaterialsLabel">No Materials</p>`}
           </div>
           <div class="valueContainer">
             <div class="valueContainerRowOne">
@@ -200,8 +215,25 @@ export class MaterialsCatalog extends LitElement {
     `;
   }
 
-  _onClick() {
-    this.count++;
+  _handleAddClick() {
+    let materialsObject = {
+      name: "Hello",
+      color: "",
+      volume: 0,
+      cost: 0,
+      deliveryDate: 0,
+    }
+
+    this.listOfMaterials.push(materialsObject);
+    this.requestUpdate();
+
+    console.log(materialsObject);
+    console.log(this.listOfMaterials);
+  }
+
+  _handleDeleteClick() {
+    // Add code here later
+    console.log("DELETE CLICK");
   }
 }
 
