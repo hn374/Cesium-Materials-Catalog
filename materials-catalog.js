@@ -182,7 +182,7 @@ export class MaterialsCatalog extends LitElement {
             <div class="valueContainerRowOne">
               <div class="nameContainer">
                 <p>Name</p>
-                <input value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.name : ""} type="text" @change=${e => this._handleChange(e, "name", this.currentlySelectedMaterial.id)}>
+                <input .value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.name : ""} type="text" @change=${e => this._handleChange(e, "name", this.currentlySelectedMaterial.id)}>
               </div>
               <div>
                 <p>Color</p>
@@ -191,17 +191,17 @@ export class MaterialsCatalog extends LitElement {
             <div class="valueContainerRowTwo">
               <div class="volumeContainer">
                 <p>Volume (m&sup3;)</p>
-                <input value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.volume : 0} type="text" @change=${e => this._handleChange(e, "volume")}>
+                <input .value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.volume : 0} type="text" @change=${e => this._handleChange(e, "volume", this.currentlySelectedMaterial.id)}>
               </div>
               <div>
                 <p>Cost (USD per m&sup3;)</p>
-                <input value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.cost : 0} type="text" @change=${e => this._handleChange(e, "cost")}>
+                <input .value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.cost : 0} type="text" @change=${e => this._handleChange(e, "cost", this.currentlySelectedMaterial.id)}>
               </div>
             </div>
             <div class="valueContainerRowThree">
               <div class="deliveryDate">
                 <p>Delivery Date</p>
-                <input value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.deliveryDate : "1/1/2020 "} type="text" @change=${e => this._handleChange(e, "deliveryDate")}>
+                <input .value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.deliveryDate : ""} type="text" @change=${e => this._handleChange(e, "deliveryDate", this.currentlySelectedMaterial.id)}>
               </div>
             </div>
           </div>
@@ -229,7 +229,7 @@ export class MaterialsCatalog extends LitElement {
 
   _handleDeleteClick() {
     this.listOfMaterials.forEach((item, index) => {
-      if (item.id == this.currentlySelectedMaterial.id) {
+      if (item?.id == this.currentlySelectedMaterial.id) {
         delete this.listOfMaterials[index]
         this.currentlySelectedMaterial = this.listOfMaterials[0];
       }
@@ -270,10 +270,10 @@ export class MaterialsCatalog extends LitElement {
 
     this.requestUpdate();
     console.log(id);
+    console.log(this.currentlySelectedMaterial);
   }
 
   calculateTotalCost() {
-    console.log(this.listOfMaterials);
     if (this.listOfMaterials?.length > 0) {
       var sum = 0;
 
