@@ -94,9 +94,11 @@ export class MaterialsCatalog extends LitElement {
 
       .listItem {
         border: 1px solid #E0E0E1;
-        list-style-type: none;
         width: 99%;
         padding: 4px 0px;
+        background-color: #0F0F13;
+        color: #E0E0E1;
+        text-align: left;
       }
 
       .listLabels {
@@ -153,7 +155,7 @@ export class MaterialsCatalog extends LitElement {
 
   constructor() {
     super();
-    this.totalCost = this.calculateTotalCost();
+    this.totalCost = 0;
     this.listOfMaterials = [];
     this.currentlySelectedMaterial = this.listOfMaterials[0];
   }
@@ -169,10 +171,10 @@ export class MaterialsCatalog extends LitElement {
         <div class="mainContainer">
           <div class="listContainer">
             ${(this.listOfMaterials.length != 0) ? this.listOfMaterials.map(item => html`
-            <li class="listItem">
-              <p class="listLabels">${item.name}</p>
-              <p class="listLabels">${item.volume} m&sup3;</p>
-            </li>
+              <button class="listItem" @click="${e => this._handleSelect(e, item.id)}">
+                <p class="listLabels">${item.name}</p>
+                <p class="listLabels">${item.volume} m&sup3;</p>
+              </button>
             `) 
             : html`<p class="noMaterialsLabel">No Materials</p>`}
           </div>
@@ -221,12 +223,19 @@ export class MaterialsCatalog extends LitElement {
 
     this.listOfMaterials.push(materialsObject);
     this.currentlySelectedMaterial = materialsObject;
+    this.calculateTotalCost();
     this.requestUpdate();
   }
 
   _handleDeleteClick() {
-    delete this.listOfMaterials[this.currentlySelectedMaterial.id]
-    this.currentlySelectedMaterial = this.listOfMaterials[0];
+    this.listOfMaterials.forEach((item, index) => {
+      if (item.id == this.currentlySelectedMaterial.id) {
+        delete this.listOfMaterials[index]
+        this.currentlySelectedMaterial = this.listOfMaterials[0];
+      }
+    });
+
+    this.calculateTotalCost();
     this.requestUpdate();
   }
 
@@ -241,11 +250,30 @@ export class MaterialsCatalog extends LitElement {
       this.currentlySelectedMaterial.deliveryDate = e.target.value;
     }
 
-    this.listOfMaterials[id] = this.currentlySelectedMaterial;
+    this.listOfMaterials.forEach((item, index) => {
+      if (item.id == id) {
+        this.listOfMaterials[index] = this.currentlySelectedMaterial;
+      }
+    });
+
+    this.calculateTotalCost();
     this.requestUpdate();
   }
 
+  _handleSelect(e, id) {
+    // Update currently selected item
+    this.listOfMaterials.forEach((item, index) => {
+      if (item.id == id) {
+        this.currentlySelectedMaterial = this.listOfMaterials[index];
+      }
+    });
+
+    this.requestUpdate();
+    console.log(id);
+  }
+
   calculateTotalCost() {
+    console.log(this.listOfMaterials);
     if (this.listOfMaterials?.length > 0) {
       var sum = 0;
 
@@ -254,9 +282,7 @@ export class MaterialsCatalog extends LitElement {
         sum += itemTotal;
       });
 
-      return sum;
-    } else {
-      return 0;
+      this.totalCost = sum;
     }
   }
 }
