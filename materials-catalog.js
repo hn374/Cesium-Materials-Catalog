@@ -32,11 +32,12 @@ export class MaterialsCatalog extends LitElement {
 
       .container {
         border: solid 1px gray;
-        padding: 16px;
+        padding: 64px 20px;
         max-width: 1000px;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
         background-color: #24242B;
       }
 
@@ -56,6 +57,7 @@ export class MaterialsCatalog extends LitElement {
         font-size: 24px;
         color: white;
         margin-right: 12px;
+        border: 1px solid black;
       }
 
       .addButton:hover {
@@ -68,10 +70,59 @@ export class MaterialsCatalog extends LitElement {
         padding: 5px 20px;
         font-size: 24px;
         color: white;
+        border: 1px solid black;
       }
 
       .deleteButton:hover {
         background-color: #FB7570;
+      }
+
+      .mainContainer {
+        display: flex;
+        margin-top: 32px;
+        color: #E0E0E1;
+      }
+
+      .listContainer {
+        background-color: #0F0F13;
+        margin-right: 32px;
+        border: 1px solid #E0E0E1;
+        width: 250px;
+      }
+
+      .valueContainer {
+        color: #E0E0E1;
+        background-color: #16171B;
+        padding: 15px 30px;
+      }
+
+      .valueContainerRowOne {
+        display: flex;
+      }
+
+      .valueContainerRowTwo {
+        display: flex;
+      }
+
+      .valueContainerRowThree {
+        display: flex;
+      }
+
+      .nameContainer {
+        margin-right: 32px;
+      }
+
+      .volumeContainer {
+        margin-right: 32px;
+      }
+
+      .deliveryDate {
+        margin-bottom: 20px;
+      }
+
+      .totalCost {
+        margin-top: 32px;
+        color: #E0E0E1;
       }
     `;
   }
@@ -87,6 +138,10 @@ export class MaterialsCatalog extends LitElement {
        * The number of times the button has been clicked.
        */
       count: {type: Number},
+      volume: {type: Number},
+      cost: {type: Number},
+      deliveryDate: {type: Number},
+      listOfMaterials: {type: Array},
     };
   }
 
@@ -94,6 +149,10 @@ export class MaterialsCatalog extends LitElement {
     super();
     this.name = 'World';
     this.count = 0;
+    this.volume = 0;
+    this.cost = 0;
+    this.deliveryDate = 0;
+    this.listOfMaterials = [];
   }
 
   render() {
@@ -105,9 +164,38 @@ export class MaterialsCatalog extends LitElement {
           <button class="deleteButton">Delete</button>
         </div>
         <div class="mainContainer">
-          <div class="listContainer"></div>
-          <div class="valueContainer"></div>
+          <div class="listContainer">
+            Hello World
+          </div>
+          <div class="valueContainer">
+            <div class="valueContainerRowOne">
+              <div class="nameContainer">
+                <p>Name</p>
+                <input type="text">
+              </div>
+              <div>
+                <p>Color</p>
+              </div>
+            </div>
+            <div class="valueContainerRowTwo">
+              <div class="volumeContainer">
+                <p>Volume (m&sup3;)</p>
+                <input type="text">
+              </div>
+              <div>
+                <p>Cost (USD per m&sup3;)</p>
+                <input type="text">
+              </div>
+            </div>
+            <div class="valueContainerRowThree">
+              <div class="deliveryDate">
+                <p>Delivery Date</p>
+                <input type="text">
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="totalCost">Total Cost: </div>
       </div>
     `;
   }
