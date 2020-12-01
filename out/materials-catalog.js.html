@@ -1,4 +1,32 @@
-import {LitElement, html, css} from 'lit-element';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: materials-catalog.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: materials-catalog.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {LitElement, html, css} from 'lit-element';
 
 export class MaterialsCatalog extends LitElement {
   /**
@@ -158,52 +186,52 @@ export class MaterialsCatalog extends LitElement {
 
   render() {
     return html`
-      <div class="container">
-        <h1 class="materialsHeader">Materials</h1>
-        <div class="buttonsContainer">
-          <button class="addButton" @click="${this._handleAddClick}">Add</button>
-          <button class="deleteButton" @click="${this._handleDeleteClick}">Delete</button>
-        </div>
-        <div class="mainContainer">
-          <div class="listContainer">
+      &lt;div class="container">
+        &lt;h1 class="materialsHeader">Materials&lt;/h1>
+        &lt;div class="buttonsContainer">
+          &lt;button class="addButton" @click="${this._handleAddClick}">Add&lt;/button>
+          &lt;button class="deleteButton" @click="${this._handleDeleteClick}">Delete&lt;/button>
+        &lt;/div>
+        &lt;div class="mainContainer">
+          &lt;div class="listContainer">
             ${(this.listOfMaterials.length != 0) ? this.listOfMaterials.map(item => html`
-              <button class="listItem" @click="${e => this._handleSelect(e, item.id)}">
-                <p class="listLabels">${item.name}</p>
-                <p class="listLabels">${item.volume} m&sup3;</p>
-              </button>
+              &lt;button class="listItem" @click="${e => this._handleSelect(e, item.id)}">
+                &lt;p class="listLabels">${item.name}&lt;/p>
+                &lt;p class="listLabels">${item.volume} m&amp;sup3;&lt;/p>
+              &lt;/button>
             `) 
-            : html`<p class="noMaterialsLabel">No Materials</p>`}
-          </div>
-          <div class="valueContainer">
-            <div class="valueContainerRowOne">
-              <div class="nameContainer">
-                <p>Name</p>
-                <input .value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.name : ""} type="text" @change=${e => this._handleChange(e, "name", this.currentlySelectedMaterial.id)}>
-              </div>
-              <div>
-                <p>Color</p>
-              </div>
-            </div>
-            <div class="valueContainerRowTwo">
-              <div class="volumeContainer">
-                <p>Volume (m&sup3;)</p>
-                <input .value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.volume : 0} type="text" @change=${e => this._handleChange(e, "volume", this.currentlySelectedMaterial.id)}>
-              </div>
-              <div>
-                <p>Cost (USD per m&sup3;)</p>
-                <input .value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.cost : 0} type="text" @change=${e => this._handleChange(e, "cost", this.currentlySelectedMaterial.id)}>
-              </div>
-            </div>
-            <div class="valueContainerRowThree">
-              <div class="deliveryDate">
-                <p>Delivery Date</p>
-                <input .value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.deliveryDate : ""} type="text" @change=${e => this._handleChange(e, "deliveryDate", this.currentlySelectedMaterial.id)}>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="totalCost">Total Cost: $${this.totalCost}</div>
-      </div>
+            : html`&lt;p class="noMaterialsLabel">No Materials&lt;/p>`}
+          &lt;/div>
+          &lt;div class="valueContainer">
+            &lt;div class="valueContainerRowOne">
+              &lt;div class="nameContainer">
+                &lt;p>Name&lt;/p>
+                &lt;input .value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.name : ""} type="text" @change=${e => this._handleChange(e, "name", this.currentlySelectedMaterial.id)}>
+              &lt;/div>
+              &lt;div>
+                &lt;p>Color&lt;/p>
+              &lt;/div>
+            &lt;/div>
+            &lt;div class="valueContainerRowTwo">
+              &lt;div class="volumeContainer">
+                &lt;p>Volume (m&amp;sup3;)&lt;/p>
+                &lt;input .value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.volume : 0} type="text" @change=${e => this._handleChange(e, "volume", this.currentlySelectedMaterial.id)}>
+              &lt;/div>
+              &lt;div>
+                &lt;p>Cost (USD per m&amp;sup3;)&lt;/p>
+                &lt;input .value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.cost : 0} type="text" @change=${e => this._handleChange(e, "cost", this.currentlySelectedMaterial.id)}>
+              &lt;/div>
+            &lt;/div>
+            &lt;div class="valueContainerRowThree">
+              &lt;div class="deliveryDate">
+                &lt;p>Delivery Date&lt;/p>
+                &lt;input .value=${this.currentlySelectedMaterial ? this.currentlySelectedMaterial.deliveryDate : ""} type="text" @change=${e => this._handleChange(e, "deliveryDate", this.currentlySelectedMaterial.id)}>
+              &lt;/div>
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+        &lt;div class="totalCost">Total Cost: $${this.totalCost}&lt;/div>
+      &lt;/div>
     `;
   }
 
@@ -307,3 +335,26 @@ export class MaterialsCatalog extends LitElement {
 }
 
 window.customElements.define('materials-catalog', MaterialsCatalog);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="MaterialsCatalog.properties.html">properties</a></li><li><a href="MaterialsCatalog.styles.html">styles</a></li><li><a href="MaterialsCatalog__handleAddClick.html">_handleAddClick</a></li><li><a href="MaterialsCatalog__handleChange.html">_handleChange</a></li><li><a href="MaterialsCatalog__handleDeleteClick.html">_handleDeleteClick</a></li><li><a href="MaterialsCatalog__handleSelect.html">_handleSelect</a></li><li><a href="MaterialsCatalog_calculateTotalCost.html">calculateTotalCost</a></li><li><a href="MaterialsCatalog_MaterialsCatalog.html">MaterialsCatalog</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Nov 30 2020 21:11:03 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
