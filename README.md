@@ -1,101 +1,40 @@
-# LitElement JavaScript starter 
+# Cesium Take Home Assignment
 
-This project includes a sample component using LitElement with JavaScript.
+I started this project out with a boilerplate Lit-Element repository. I have never used Lit-Element before, but I figured it looked easy enough to try to learn and I enjoy learning new technologies. Fortunately, I had a lot of prior experience with React and it seemed that Lit-Element and React shared a lot of similarities. 
 
-## Setup
+I spent a little over 3 hours total in the span of about 4 days working on this project. I was able to complete most of the requirements in time except for the color picker. I had to trade that feature off in order to create documentation with  JS Docs and Unit Tests with Jasmine, both of which I have never used before. 
 
-Install dependencies:
+I was able to add, delete and change the properties of the materials. You are also able to click on each item in the list and it will be displayed on the right side. I also created a function to calculate the total cost of all the materials. 
 
-```bash
-npm i
-```
+The server is an Express.js server that basically just feeds some mock data into our application so it can load as materials. 
 
-## Testing
+Overall, I really enjoyed this project and found myself in a flow state of working once I got started.
+## Questions and Observations
 
-This sample uses Karma, Chai, Mocha, and the open-wc test helpers for testing. See the [open-wc testing documentation](https://open-wc.org/testing/testing.html) for more information.
+A question that I had was that I wasn't sure if I was suppose to make the entire page the component, or just the individual parts.
 
-Tests can be run with the `test` script:
+I also was not sure if this materials catalog would be used for other purposes, if I had more time I would have made it reusable where you can make it any type of catalog you want. 
 
-```bash
-npm test
-```
+## If I Had More Time
 
-## Dev Server
+If I had more time for this project, I would fix a lot of the small details with the component. For example, I would allow the total cost to be able to add cents so it's not just the base dollar amount. I would also add some icons for the Add and Delete buttons.
 
-This sample uses open-wc's [es-dev-server](https://github.com/open-wc/open-wc/tree/master/packages/es-dev-server) for previewing the project without additional build steps. ES dev server handles resolving Node-style "bare" import specifiers, which aren't supported in browsers. It also automatically transpiles JavaScript and adds polyfills to support older browsers.
+Some bigger features I would implement would be the color picker, a delivery date picker, and input validation.
 
-To run the dev server and open the project in a new browser tab:
+I would also try to find ways to make my code more concise and clear. There are also some weird lines of code that I need to polish up, like when I am removing an element from the materials list, that item that was in the list of materials array is just undefined instead of completely removed.
 
-```bash
-npm run serve
-```
+If I had more time, I would also have started this project differently. I would have made the left list of materials a separate component, and I also would have made each item in that list a single component that could be reused. The labels and inputs on the right side also would have been a single component if I had the time. I decided to make it all in one file because I figured it would be faster since I only had a time limit of 3 hours.
 
-There is a development HTML file located at `/dev/index.html` that you can view at http://localhost:8000/dev/index.html.
+## Preparation To Run The Project
 
-## Editing
+Clone the repository from Github. 
 
-If you use VS Code, we highly reccomend the [lit-plugin extension](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin), which enables some extremely useful features for lit-html templates:
-  - Syntax highlighting
-  - Type-checking
-  - Code completion
-  - Hover-over docs
-  - Jump to definition
-  - Linting
-  - Quick Fixes
-  
-  The project is setup to reccomend lit-plugin to VS Code users if they don't already have it installed.
+Make sure to install the needed node_modules, either by running `npm install` or `yarn`.
 
-## Linting
+## How To Run The Project
 
-Linting of JavaScript files is provided by [ESLint](eslint.org). In addition, [lit-analyzer](https://www.npmjs.com/package/lit-analyzer) is used to type-check and lint lit-html templates with the same engine and rules as lit-plugin.
+To run the project, open up two terminals.
 
-The rules are mostly the recommended rules from each project, but some have been turned off to make LitElement usage easier. The recommended rules are pretty strict, so you may want to relax them by editing `.eslintrc.json`.
+On one of the terminals, run `npm run server` to start the server. This is how you are going to get the data for the materials list.
 
-To lint the project run:
-
-```bash
-npm run lint
-```
-
-## Formatting
-
-[Prettier](https://prettier.io/) is used for code formatting. It has been pre-configured according to the Polymer Project's style. You can change this in `.prettierrc.json`.
-
-Prettier has not been configured to run when commiting files, but this can be added with Husky and and `pretty-quick`. See the [prettier.io](https://prettier.io/) site for instructions.
-
-## Static Site
-
-This project includes a simple website generated with the [eleventy](11ty.dev) static site generator and the templates and pages in `/docs-src`. The site is generated to `/docs` and intended to be checked in so that GitHub pages can serve the site [from `/docs` on the master branch](https://help.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
-
-To enable the site go to the GitHub settings and change the GitHub Pages &quot;Source&quot; setting to &quot;master branch /docs folder&quot;.</p>
-
-To build the site, run:
-
-```bash
-npm run docs
-```
-
-To serve the site locally, run:
-
-```bash
-npm run docs:serve
-```
-
-To watch the site files, and re-build automatically, run:
-
-```bash
-npm run docs:watch
-```
-
-The site will usually be served at http://localhost:8000.
-
-## Bundling and minification
-
-This starter project doesn't include any build-time optimizations like bundling or minification. We recommend publishing components as unoptimized JavaScript modules, and performing build-time optimizations at the application level. This gives build tools the best chance to deduplicate code, remove dead code, and so on.
-
-For information on building application projects that include LitElement components, see [Build for production](https://lit-element.polymer-project.org/guide/build) on the LitElement site.
-
-
-## More information
-
-See [Get started](https://lit-element.polymer-project.org/guide/start) on the LitElement site for more information.
+On the other terminal, run `npm run serve` to start the web application. After that, you should go to `http://localhost:8000/dev` to see the materials catalog.
