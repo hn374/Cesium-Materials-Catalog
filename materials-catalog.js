@@ -155,9 +155,13 @@ export class MaterialsCatalog extends LitElement {
 
   constructor() {
     super();
-    this.totalCost = 0;
-    this.listOfMaterials = [];
-    this.currentlySelectedMaterial = this.listOfMaterials[0];
+    fetch('http://localhost:3000/materials').then(res => res.json()).then(res => {
+      console.log(res);
+      this.listOfMaterials = res;
+      this.currentlySelectedMaterial = this.listOfMaterials[0];
+      this.totalCost = 0;
+      this.calculateTotalCost();
+    });
   }
 
   render() {
@@ -269,8 +273,7 @@ export class MaterialsCatalog extends LitElement {
     });
 
     this.requestUpdate();
-    console.log(id);
-    console.log(this.currentlySelectedMaterial);
+    this.calculateTotalCost();
   }
 
   calculateTotalCost() {
