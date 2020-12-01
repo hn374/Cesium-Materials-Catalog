@@ -2,7 +2,7 @@
 
 I started this project out with a boilerplate Lit-Element repository. I have never used Lit-Element before, but I figured it looked easy enough to try to learn and I enjoy learning new technologies. Fortunately, I had a lot of prior experience with React and it seemed that Lit-Element and React shared a lot of similarities. 
 
-I spent a little over 3 hours total in the span of about 4 days working on this project. I was able to complete most of the requirements in time except for the color picker. I had to trade that feature off in order to create documentation with  JS Docs and Unit Tests with Jasmine, both of which I have never used before. 
+I spent a little over 3 hours total in the span of about 4 days working on this project. I was able to complete most of the requirements in time except for the color picker. I had to trade that feature off in order to create documentation with JS Docs which I have never used before. I do not know if I used JS Docs completely right, but when I opened up the html files in the `out` folder it seemed to generate all of my comments from the code. I also attempted to implement unit tests with karma-runner but unfortunately ran out of time and was not able to complete it fully.
 
 I was able to add, delete and change the properties of the materials. You are also able to click on each item in the list and it will be displayed on the right side. I also created a function to calculate the total cost of all the materials. 
 
@@ -38,3 +38,7 @@ To run the project, open up two terminals.
 On one of the terminals, run `npm run server` to start the server. This is how you are going to get the data for the materials list.
 
 On the other terminal, run `npm run serve` to start the web application. After that, you should go to `http://localhost:8000/dev` to see the materials catalog.
+
+## Running JS Doc
+
+To run JS Doc, use the command `jsdoc materials-catalog.js` and it will generate an `out` folder, in there you will find the generated html docs.
